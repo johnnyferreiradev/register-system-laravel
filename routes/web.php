@@ -20,6 +20,7 @@ Route::get('/products', 'ProductController@index');
 Route::get('/categories', 'CategoryController@index');
 Route::get('/categories/new', 'CategoryController@create');
 Route::post('/categories', 'CategoryController@store');
+Route::get('/categories/delete/{id}', 'CategoryController@destroy'); // O uso desse metodo get é temporário
 
 Auth::routes();
 
