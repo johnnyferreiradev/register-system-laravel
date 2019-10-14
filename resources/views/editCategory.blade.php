@@ -3,7 +3,7 @@
 @section('body')
     <div class="card border">
         <div class="card-body">
-            <form action="/categories" method="POST">
+            <form action="/categories/{{$category->id}}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="categoryName">Nome da categoria</label>
@@ -13,6 +13,7 @@
                         name="categoryName"
                         id="categoryName"
                         placeholder="Digite o nome da categoria"
+                        value="{{ $category->name }}"
                     >
                 </div>
                 <button type="submit" class="btn btn-primary btn-sm">Salvar</button>

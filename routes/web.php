@@ -21,6 +21,8 @@ Route::get('/categories', 'CategoryController@index');
 Route::get('/categories/new', 'CategoryController@create');
 Route::post('/categories', 'CategoryController@store');
 Route::get('/categories/delete/{id}', 'CategoryController@destroy'); // O uso desse metodo get é temporário
+Route::get('/categories/edit/{id}', 'CategoryController@edit');
+Route::post('/categories/{id}', 'CategoryController@update');
 
 Auth::routes();
 
