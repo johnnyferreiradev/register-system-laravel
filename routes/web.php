@@ -18,6 +18,8 @@ Route::get('/', function () {
 Route::get('/products', 'ProductController@index');
 
 Route::get('/categories', 'CategoryController@index');
+Route::get('/categories/new', 'CategoryController@create');
+Route::post('/categories', 'CategoryController@store');
 
 Auth::routes();
 
