@@ -6,10 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <title>Cadastro de Produtos</title>
+    <style>
+        .navbar {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        @component('components.navbar')
+        @component('components.navbar', ['current'=>$current])
         @endcomponent
         <main role="main">
             @hasSection('body')
