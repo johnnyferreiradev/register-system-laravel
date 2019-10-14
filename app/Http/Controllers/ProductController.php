@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Category;
+use App\Product;
+
 class ProductController extends Controller
 {
     /**
@@ -13,7 +16,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('products');
+        $products = Product::all();
+        
+        foreach($products as $product) {
+            $category = Category::find($product->category_id);
+            $product->categoryName = $category->name;
+        }
+        
+        return view('products', compact('products'));
     }
 
     /**
@@ -23,7 +33,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('newProduct', compact('categories'));
     }
 
     /**
@@ -34,7 +45,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product();
+        $product->name = $request->input('productName');
+        $product->stock = $request->input('quantityInStock');
+        $product->price = $request->input('productPrice');
+        $product->category_id = $request->input('category');
+        $product->save();
+        return redirect('/products');
     }
 
     /**
@@ -56,7 +73,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $categories = Category::all();
+        return view('editProduct', compact('product', 'categories'));
     }
 
     /**
@@ -68,7 +87,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        if(isset($product)) {
+            $product->name = $request->input('productName');
+            $product->stock = $request->input('quantityInStock');
+            $product->price = $request->input('productPrice');
+            $product->category_id = $request->input('category');
+            $product->save();
+            return redirect('/products');
+        } else {
+            return redirect('/products');
+        }
     }
 
     /**
@@ -79,6 +108,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        if(isset($product)) {
+            $product->delete();
+        }
+        return redirect('/products');
     }
 }

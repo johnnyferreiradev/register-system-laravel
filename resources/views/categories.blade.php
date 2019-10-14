@@ -4,8 +4,8 @@
     <div class="card border">
         <div class="card-body">
             <h5 class="card-title"> Cadastro de categorias </h5>
+            <a href="/categories/new" class="btn btn-sm btn-primary my-3" role="button">Nova categoria</a>
             @if(count($categories) > 0)
-                <a href="/categories/new" class="btn btn-sm btn-primary my-3" role="button">Nova categoria</a>
                 <table class="table table-ordered table-hover">
                     <thead>
                         <tr>
