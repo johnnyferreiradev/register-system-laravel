@@ -29,6 +29,9 @@ Route::get('/categories/delete/{id}', 'CategoryController@destroy'); // O uso de
 Route::get('/categories/edit/{id}', 'CategoryController@edit');
 Route::post('/categories/{id}', 'CategoryController@update');
 
+Route::get('/client', 'ClientController@index');
+Route::get('/client/new', 'ClientController@create');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
