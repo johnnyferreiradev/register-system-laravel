@@ -37,12 +37,34 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $rules = [
             'name' => 'required|min:2|max:20|unique:clients',
             'age' => 'required',
             'address' => 'required|min:5',
             'email' => 'required|email'
-        ]);
+        ];
+
+        // Customizando mensagens de erro
+        $messages = [
+            'name.required' => 'O campo nome é de preenchimento obrigatório',
+            'name.min' => 'O nome deve conter no mínimo 2 caracteres',
+            'name.max' => 'O nome deve conter no máximo 20 caracteres',
+            'name.unique' => 'O nome inserido já está sendo usado',
+            'age.required' => 'O campo idade é de preenchimento obrigatório',
+            'address.required' => 'O campo endereço é de preenchimento obrigatório',
+            'address.min' => 'O endereço deve conter no mínimo 5 caracteres',
+            'email.required' => 'O campo email é de preenchimento obrigatório',
+            'email.email' => 'O email inserido é invalido'
+        ];
+
+        $request->validate($rules, $messages);
+
+        // $request->validate([
+        //     'name' => 'required|min:2|max:20|unique:clients',
+        //     'age' => 'required',
+        //     'address' => 'required|min:5',
+        //     'email' => 'required|email'
+        // ]);
 
         $client = new Client();
         $client->name = $request->input('name');
