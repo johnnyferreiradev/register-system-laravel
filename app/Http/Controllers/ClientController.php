@@ -59,13 +59,6 @@ class ClientController extends Controller
 
         $request->validate($rules, $messages);
 
-        // $request->validate([
-        //     'name' => 'required|min:2|max:20|unique:clients',
-        //     'age' => 'required',
-        //     'address' => 'required|min:5',
-        //     'email' => 'required|email'
-        // ]);
-
         $client = new Client();
         $client->name = $request->input('name');
         $client->age = $request->input('age');

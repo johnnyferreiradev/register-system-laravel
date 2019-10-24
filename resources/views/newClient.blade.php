@@ -22,33 +22,68 @@
                             @csrf
                             <div class="form-group">
                                 <label for="name">Nome do cliente</label>
-                                <input type="text" id="name" class="form-control" name="name" placeholder="Nome do cliente"> 
+                                <input
+                                    type="text"
+                                    id="name"
+                                    class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                    name="name"
+                                    placeholder="Nome do cliente"
+                                > 
+                                @if ($errors->has('name'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('name') }}
+                                    </div>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="age">Idade do cliente</label>
-                                <input type="number" id="age" class="form-control" name="age" placeholder="Idade do cliente"> 
+                                <input
+                                    type="number"
+                                    id="age"
+                                    class="form-control {{ $errors->has('age') ? 'is-invalid' : '' }}"
+                                    name="age"
+                                    placeholder="Idade do cliente"
+                                >
+                                @if ($errors->has('age'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('age') }}
+                                    </div>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="address">Endereço do cliente</label>
-                                <input type="text" id="address" class="form-control" name="address" placeholder="Endereço do cliente"> 
+                                <input
+                                    type="text" 
+                                    id="address" 
+                                    class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}" 
+                                    name="address" 
+                                    placeholder="Endereço do cliente"
+                                >
+                                @if ($errors->has('address'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('address') }}
+                                    </div>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="email">Email do cliente</label>
-                                <input type="text" id="email" class="form-control" name="email" placeholder="Email do cliente"> 
+                                <input 
+                                    type="text" 
+                                    id="email" 
+                                    class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" 
+                                    name="email" 
+                                    placeholder="Email do cliente"
+                                >
+                                @if ($errors->has('email'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('email') }}
+                                    </div>
+                                @endif
                             </div>
                             <button type="submit" class="btn btn-primary btn-small">Salvar</button>
                             <button type="cancel" class="btn btn-primary btn-small">Cancelar</button>
                         </form>
                     </div>
-                    @if($errors->any())
-                        <div class="card-footer">
-                            @foreach($errors->all() as $error)
-                                <div class="alert alert-danger" role="alert">
-                                    {{ $error }}
-                                </div>
-                            @endforeach
-                        </div>
-                    @endif
                 </div>
             </div>
         </div>
