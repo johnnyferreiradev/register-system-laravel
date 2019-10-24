@@ -14,7 +14,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexView()
     {
         $products = Product::all();
         
@@ -24,6 +24,13 @@ class ProductController extends Controller
         }
         
         return view('products', compact('products'));
+    }
+
+    public function index()
+    {
+        $products = Product::all();
+        
+        return $products->toJson();
     }
 
     /**

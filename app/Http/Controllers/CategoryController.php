@@ -110,4 +110,8 @@ class CategoryController extends Controller
         $categories = Category::all();
         return json_encode($categories);
     }
+
+    public function testeDeAsync() {
+        return json_encode(["data" => date('d/m/y h:i:s')]);
+    }
 }

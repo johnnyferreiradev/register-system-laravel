@@ -7,3 +7,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/categories', 'CategoryController@indexJson');
+
+
+Route::get('/teste', 'CategoryController@testeDeAsync');
+
+Route::resource('/products', 'ProductController');

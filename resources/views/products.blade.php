@@ -5,7 +5,7 @@
         <div class="card-body">
             <h5 class="card-title"> Cadastro de produtos </h5>
 
-            <table class="table table-ordered table-hover">
+            <table class="table table-ordered table-hover" id="productsTable">
                 <thead>
                     <tr>
                         <th>Código</th>
@@ -112,8 +112,43 @@
             });
         }
 
+        function loadTeste() { // Show!!!!
+            setInterval(() => {
+                $.getJSON('/api/teste', function(data) {
+                    console.log(data);
+                });
+            }, 1000);
+        }
+
+        function createRow(product) {
+            return (
+                `<tr>
+                    <td>${product.id}</td>
+                    <td>${product.name}</td>
+                    <td>${product.stock}</td>
+                    <td>${product.price}</td>
+                    <td>${product.category_id}</td>
+                    <td>
+                        <button class='btn btn-sm btn-primary'>Editar</button>
+                        <button class='btn btn-sm btn-danger'>Excluir</button>
+                    </td>
+                </tr>`
+            )
+        }
+
+        function loadProducts() {
+            $.getJSON('/api/products', function(products) {
+                for(let i=0; i<products.length; i++) {
+                    line = createRow(products[i]);
+                    $('#productsTable > tbody').append(line);
+                }
+            });
+        }
+
         $(function() {
             loadCategories();
+            //loadTeste();
+            loadProducts();
         });
     </script>
 @endsection
