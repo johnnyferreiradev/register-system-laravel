@@ -102,5 +102,18 @@
             $('#productStock').val('');
             $('#dlgProducts').modal('show');
         }
+
+        function loadCategories() {
+            $.getJSON('/api/categories', function(data) {
+                for(let i=0; i<data.length; i++) {
+                    option = `<option value='${data[i].id}'>${data[i].name}</option>`
+                    $('#category').append(option);
+                }
+            });
+        }
+
+        $(function() {
+            loadCategories();
+        });
     </script>
 @endsection
