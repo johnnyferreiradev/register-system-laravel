@@ -103,4 +103,11 @@ class CategoryController extends Controller
         }
         return redirect('/categories');
     }
+
+    /** Funções da API */
+    public function indexJson()
+    {
+        $categories = Category::all();
+        return json_encode($categories);
+    }
 }
