@@ -156,6 +156,24 @@
             });
         }
 
+        function createProduct() {
+            product = {
+                productName: $('#productName').val(),
+                productPrice: $('#productPrice').val(),
+                quantityInStock: $('#productStock').val(),
+                category: $('#category').val(),
+            };
+
+            $.post('/api/products', product, function(data) {
+                console.log(data);
+            });
+        }
+
+        $('#formProduct').submit(function(event) {
+            event.preventDefault();
+            createProduct();
+        });
+
         $(function() {
             loadCategories();
             //loadTeste();
