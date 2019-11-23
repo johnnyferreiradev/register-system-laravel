@@ -88,7 +88,7 @@
 
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Salvar</button>
-                            <button type="cancel" class="btn btn-secondary" data-dissmiss="modal">Cancelar</button>
+                            <button type="cancel" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         </div>
                     </div>
                 </form>
@@ -165,7 +165,9 @@
             };
 
             $.post('/api/products', product, function(data) {
-                console.log(data);
+                let product = JSON.parse(data);
+                let row = createRow(product);
+                $('#productsTable > tbody').append(row);
             });
         }
 
