@@ -172,6 +172,7 @@
         $('#formProduct').submit(function(event) {
             event.preventDefault();
             createProduct();
+            $('#dlgProducts').modal('hide');
         });
 
         $(function() {
