@@ -17,19 +17,19 @@ class ProductController extends Controller
     public function indexView()
     {
         $products = Product::all();
-        
+
         foreach($products as $product) {
             $category = Category::find($product->category_id);
             $product->categoryName = $category->name;
         }
-        
+
         return view('products', compact('products'));
     }
 
     public function index()
     {
         $products = Product::all();
-        
+
         return $products->toJson();
     }
 
@@ -53,12 +53,14 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = new Product();
+
         $product->name = $request->input('productName');
         $product->stock = $request->input('quantityInStock');
         $product->price = $request->input('productPrice');
         $product->category_id = $request->input('category');
         $product->save();
-        return redirect('/products');
+
+        return json_encode($product);
     }
 
     /**

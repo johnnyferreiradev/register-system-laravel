@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+
                 </tbody>
             </table>
         </div>
@@ -30,7 +30,8 @@
     <div class="modal" tabindex="-1" role="dialog" id="dlgProducts">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form class="form-horizontal" id="formProduct">
+                <form class="form-horizontal" id="formProduct" action="/products" method="POST">
+                    @csrf
                     <div class="modal-header">
                         <h5 class="modal-title">Novo produto</h5>
                     </div>
@@ -41,10 +42,11 @@
                             <label for="productName" class="control-label">Nome do produto</label>
                             <div class="input-group">
                                 <input
-                                    type="text" 
-                                    class="form-control" 
-                                    id="productName" 
+                                    type="text"
+                                    class="form-control"
+                                    id="productName"
                                     placeholder="Nome do produto"
+                                    name="productName"
                                 >
                             </div>
                         </div>
@@ -53,10 +55,11 @@
                             <label for="productPrice" class="control-label">Preço</label>
                             <div class="input-group">
                                 <input
-                                    type="number" 
-                                    class="form-control" 
-                                    id="productPrice" 
+                                    type="number"
+                                    class="form-control"
+                                    id="productPrice"
                                     placeholder="Preço do produto"
+                                    name="productPrice"
                                 >
                             </div>
                         </div>
@@ -65,10 +68,11 @@
                             <label for="productStock" class="control-label">Quantidade</label>
                             <div class="input-group">
                                 <input
-                                    type="number" 
-                                    class="form-control" 
-                                    id="productStock" 
+                                    type="number"
+                                    class="form-control"
+                                    id="productStock"
                                     placeholder="Quantidade em estoque"
+                                    name="quantityInStock"
                                 >
                             </div>
                         </div>
@@ -76,7 +80,7 @@
                         <div class="form-group">
                             <label for="productName" class="control-label">Nome do produto</label>
                             <div class="input-group">
-                                <select id="category" class="form-control">
+                                <select id="category" class="form-control" name="category">
                                     <!-- Os options são adicionados via JS -->
                                 </select>
                             </div>
@@ -95,6 +99,13 @@
 
 @section('javascript')
     <script type="text/javascript">
+        // Adiciona o token csrf para todas as requisições realizadas
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': "{( csrf_token() )}",
+            }
+        });
+
         function newProduct() {
             $('#id').val('');
             $('#productName').val('');
