@@ -120,7 +120,9 @@ class ProductController extends Controller
         $product = Product::find($id);
         if(isset($product)) {
             $product->delete();
+            return response('Ok', 200);
         }
-        return redirect('/products');
+
+        return response('Product not found', 404);
     }
 }

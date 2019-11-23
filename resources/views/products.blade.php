@@ -140,11 +140,11 @@
                     <td>${product.price}</td>
                     <td>${product.category_id}</td>
                     <td>
-                        <button class='btn btn-sm btn-primary'>Editar</button>
-                        <button class='btn btn-sm btn-danger'>Excluir</button>
+                        <button class='btn btn-sm btn-primary' onclick='edit(${product.id})'>Editar</button>
+                        <button class='btn btn-sm btn-danger' onclick='remove(${product.id})'>Excluir</button>
                     </td>
                 </tr>`
-            )
+            );
         }
 
         function loadProducts() {
@@ -168,6 +168,31 @@
                 let product = JSON.parse(data);
                 let row = createRow(product);
                 $('#productsTable > tbody').append(row);
+            });
+        }
+
+        function edit(id) {
+            console.log(`edit - ${id}`);
+        }
+
+        function remove(id) {
+            $.ajax({
+                type: "DELETE",
+                url: "http://localhost:8000/api/products/" + id,
+                context: this,
+            })
+            .done(function(msg){
+                rows = $('#productsTable > tbody > tr');
+                element = rows.filter(function (index, elem) {
+                    return elem.cells[0].textContent == id
+                });
+
+                if(element) {
+                    element.remove();
+                }
+            })
+            .fail(function(jqXHR, textStatus, msg){
+                alert(msg);
             });
         }
 

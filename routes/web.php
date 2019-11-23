@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::get('/products', 'ProductController@indexView');
 Route::get('/products/new', 'ProductController@create');
 Route::post('/products', 'ProductController@store');
-Route::get('/products/delete/{id}', 'ProductController@destroy'); // O uso desse metodo get é temporário
+//Route::get('/products/delete/{id}', 'ProductController@destroy'); // O uso desse metodo get é temporário
 Route::get('/products/edit/{id}', 'ProductController@edit');
 Route::post('/products/{id}', 'ProductController@update');
 
