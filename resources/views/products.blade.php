@@ -182,6 +182,38 @@
             });
         }
 
+        function updateProduct(id) {
+            product = {
+                id: $('#id').val(),
+                productName: $('#productName').val(),
+                productPrice: $('#productPrice').val(),
+                quantityInStock: $('#productStock').val(),
+                category: $('#category').val(),
+            };
+
+            $.ajax({
+                type: "PUT",
+                url: "http://localhost:8000/api/products/" + product.id,
+                context: this,
+                data: product,
+                success: function (data) {
+                    product = JSON.parse(data);
+                    rows = $('#productsTable > tbody > tr');
+                    element = rows.filter(function (index, elem) {
+                        return elem.cells[0].textContent == product.id
+                    });
+
+                    if(element) {
+                        element[0].cells[0].textContent = product.id;
+                        element[0].cells[1].textContent = product.name;
+                        element[0].cells[2].textContent = product.price;
+                        element[0].cells[3].textContent = product.stock;
+                        element[0].cells[4].textContent = product.category_id;
+                    }
+                },
+            })
+        }
+
         function remove(id) {
             $.ajax({
                 type: "DELETE",
@@ -205,7 +237,15 @@
 
         $('#formProduct').submit(function(event) {
             event.preventDefault();
-            createProduct();
+
+            let productId = $('#id').val();
+
+            if (productId == '') {
+                createProduct();
+            } else {
+                updateProduct(productId);
+            }
+
             $('#dlgProducts').modal('hide');
         });
 
