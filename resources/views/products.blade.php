@@ -172,7 +172,14 @@
         }
 
         function edit(id) {
-            console.log(`edit - ${id}`);
+            $.getJSON(`/api/products/${id}`, function(data) {
+                $('#id').val(data.id);
+                $('#productName').val(data.name);
+                $('#productPrice').val(data.price);
+                $('#productStock').val(data.stock);
+                $('#category').val(data.category_id);
+                $('#dlgProducts').modal('show');
+            });
         }
 
         function remove(id) {

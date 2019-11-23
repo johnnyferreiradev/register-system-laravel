@@ -71,7 +71,13 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+
+        if(isset($product)) {
+            return json_encode($product);
+        } else {
+            return response('Product not found', 404);
+        }
     }
 
     /**
@@ -103,9 +109,10 @@ class ProductController extends Controller
             $product->price = $request->input('productPrice');
             $product->category_id = $request->input('category');
             $product->save();
-            return redirect('/products');
+
+            return json_encode($product);
         } else {
-            return redirect('/products');
+            return response('Product not found', 404);
         }
     }
 
